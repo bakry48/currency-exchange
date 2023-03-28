@@ -12,10 +12,13 @@ import org.springframework.web.client.RestTemplate;
 public class CircuitBreakerController {
     private Logger logger = LoggerFactory.getLogger(CircuitBreakerController.class);
     @GetMapping("/sample-api")
-    @Retry(name="default")
+    @Retry(name="sample-api" , fallbackMethod = "hardCodedResponse")
     public String sampleApi(){
         logger.info("there is request");
         ResponseEntity<String> response = new RestTemplate().getForEntity("http://localhost:8080/getanything",String.class);
         return response.getBody();
+    }
+    public String hardCodedResponse(Exception ex){
+        return "Fallback Response";
     }
 }
