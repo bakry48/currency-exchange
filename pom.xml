@@ -94,6 +94,12 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                <image>
+                    <name>abakry/mmv2-${project.artifactId}:${project.version}</name>
+                    <pullpolicy>IF_NOT_PRESENT</pullpolicy>
+                </image>
+                </configuration>
             </plugin>
         </plugins>
     </build>
